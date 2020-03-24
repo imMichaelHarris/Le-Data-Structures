@@ -9,7 +9,7 @@ class LRUCache:
     """
     def __init__(self, limit=10):
         self.list = DoublyLinkedList()
-        self.storage = {}
+        self.cache = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -19,7 +19,9 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        node = self.cache[key]
+        self.list.move_to_front(node)
+        return node
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -32,4 +34,9 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        pair = {key, value}
+        # Add pair to dll
+        self.list.add_to_head(pair)
+        self.cache[key] = pair
+        # If cache is at max capacity
+        # If key already exist in cache overwrite the value
