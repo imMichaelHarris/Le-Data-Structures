@@ -10,6 +10,7 @@ class LRUCache:
     def __init__(self, limit=10):
         self.list = DoublyLinkedList()
         self.cache = {}
+        self.limit = limit
 
     """
     Retrieves the value associated with the given key. Also
@@ -36,12 +37,16 @@ class LRUCache:
     def set(self, key, value):
         pair = {key, value}
         # Add pair to dll
-        self.cache[key] = pair
+        # self.cache[key] = pair
         # If cache is at max capacity
-        if self.cache[key]:
+        if key in self.cache:
             self.list.delete(self.cache[key])
-            self.cache[key] = pair
-            self.list.add_to_head(pair)
+            self.list.add_to_head(value)
         elif len(self.list) >= self.limit:
             self.list.remove_from_tail()
+            self.list.add_to_head(value)
+        else:
+            self.list.add_to_head(value)
+
+        self.cache[key] = pair
         # If key already exist in cache overwrite the value
