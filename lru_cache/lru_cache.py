@@ -36,7 +36,12 @@ class LRUCache:
     def set(self, key, value):
         pair = {key, value}
         # Add pair to dll
-        self.list.add_to_head(pair)
         self.cache[key] = pair
         # If cache is at max capacity
+        if self.cache[key]:
+            self.list.delete(self.cache[key])
+            self.cache[key] = pair
+            self.list.add_to_head(pair)
+        elif len(self.list) >= self.limit:
+            self.list.remove_from_tail()
         # If key already exist in cache overwrite the value
