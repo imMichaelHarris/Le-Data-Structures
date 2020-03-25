@@ -20,10 +20,16 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        node = self.cache[key]
-        self.list.move_to_front(node)
-        return node
-
+        if key in self.cache:
+            node = self.cache[key]
+            self.list.move_to_end(node)
+            # print(f"This is the value {node[key]}, {key}")
+            # self.list.delete(node)
+            # self.list.add_to_head(node)
+            # print("test", node[1])
+            return node.value[1]
+        else:
+            return None
     """
     Adds the given key-value pair to the cache. The newly-
     added pair should be considered the most-recently used
@@ -35,18 +41,32 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pair = {key, value}
+        pair = (key, value)
+        # print("Hey ", pair)
         # Add pair to dll
         # self.cache[key] = pair
         # If cache is at max capacity
+        # print(F"Hi {self.list.head.value}")
         if key in self.cache:
-            self.list.delete(self.cache[key])
-            self.list.add_to_head(value)
+            node = self.cache[key]
+            node.value = pair
+            print(f"Front {self.list.head}")
+            self.list.move_to_end(node)
+            # self.cache[key] = pair
+            return
+            # print(self.cache[key], pair)
+            # node.value = pair
+            # self.list.move_to_front(self.cache[key])
+            # node[key] = value
+            # self.list.add_to_head(pair)
         elif len(self.list) >= self.limit:
-            self.list.remove_from_tail()
-            self.list.add_to_head(value)
-        else:
-            self.list.add_to_head(value)
+            print("Over", len(self.list))
+            del self.cache[self.list.head.value[0]]
+            self.list.remove_from_head()
 
-        self.cache[key] = pair
+
+        
+        self.list.add_to_tail(pair)
+        self.cache[key] = self.list.tail
+
         # If key already exist in cache overwrite the value
