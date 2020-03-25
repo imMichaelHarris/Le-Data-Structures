@@ -44,17 +44,14 @@ class BinarySearchTree:
         if self.value is None:
             return False
         if self.value == target:
-            print("here")
             return True
         else:
             if target < self.value:
-                print("test", target, self.value)
                 if self.left is None:
                     return None
                 else:
                     return self.left.contains(target)
             else:
-                print("else", target, self.value)
                 if self.right is None:
                     return None
 
@@ -62,8 +59,12 @@ class BinarySearchTree:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
 
+        # Check if something on right if there is then call get max on right value
+        # Base case when right is None then return self.value
+        if self.right is None:
+            return self.value
+        return self.right.get_max()
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
