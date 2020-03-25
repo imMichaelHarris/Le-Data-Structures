@@ -14,15 +14,14 @@ class BinarySearchTree:
     def insert(self, value):
         newNode = BinarySearchTree(value)
         # If the value inserting is less then go
-        print(self.value)
+        # print(self.value)
         if value < self.value:
-            print("less ", value, self.value)
+            
             if self.left is not None:
                 self.left.insert(value)
             else:
                 self.left = newNode
         else:
-            print("not")
 
             if self.right is not None:
                 self.right.insert(value)
@@ -41,13 +40,25 @@ class BinarySearchTree:
         #If the target is self.value then return
         # Otherwise check if target is less than value if so use recursion to go left
         # If target isnt less than the self.value than go use recursion to goright
+        print(self.value, target)
+        if self.value is None:
+            return False
         if self.value == target:
-            return self.value
-
-        if target < self.value:
-            self.contains(self.left, target)
+            print("here")
+            return True
         else:
-            self.contains(self.right, target) 
+            if target < self.value:
+                print("test", target, self.value)
+                if self.left is None:
+                    return None
+                else:
+                    return self.left.contains(target)
+            else:
+                print("else", target, self.value)
+                if self.right is None:
+                    return None
+
+                return self.right.contains(target) 
 
     # Return the maximum value found in the tree
     def get_max(self):
