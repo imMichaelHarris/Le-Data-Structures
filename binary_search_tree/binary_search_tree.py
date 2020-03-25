@@ -12,7 +12,17 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        newNode = BinarySearchTree(value)
+        # If the value inserting is less then go
+        if value < self.value:
+            self.left = newNode
+        else:
+            self.right = newNode
+
+            # If the left value is not None then call
+            # If none then set the left to value
+
+        # Else go right
 
     # Return True if the tree contains the value
     # False if it does not
