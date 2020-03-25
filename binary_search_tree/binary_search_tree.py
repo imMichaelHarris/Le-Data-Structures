@@ -14,14 +14,18 @@ class BinarySearchTree:
     def insert(self, value):
         newNode = BinarySearchTree(value)
         # If the value inserting is less then go
+        print(self.value)
         if value < self.value:
+            print("less ", value, self.value)
             if self.left is not None:
-                self.insert(self.left, value)
+                self.left.insert(value)
             else:
                 self.left = newNode
         else:
+            print("not")
+
             if self.right is not None:
-                self.insert(self.right, value)
+                self.right.insert(value)
             else:
                 self.right = newNode
             
