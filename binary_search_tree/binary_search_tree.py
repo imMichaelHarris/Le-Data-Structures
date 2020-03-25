@@ -15,9 +15,16 @@ class BinarySearchTree:
         newNode = BinarySearchTree(value)
         # If the value inserting is less then go
         if value < self.value:
-            self.left = newNode
+            if self.left is not None:
+                self.insert(self.left, value)
+            else:
+                self.left = newNode
         else:
-            self.right = newNode
+            if self.right is not None:
+                self.insert(self.right, value)
+            else:
+                self.right = newNode
+            
 
             # If the left value is not None then call
             # If none then set the left to value
