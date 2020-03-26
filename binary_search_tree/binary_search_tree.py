@@ -40,7 +40,7 @@ class BinarySearchTree:
         #If the target is self.value then return
         # Otherwise check if target is less than value if so use recursion to go left
         # If target isnt less than the self.value than go use recursion to goright
-        print(self.value, target)
+        # print(self.value, target)
         if self.value is None:
             return False
         if self.value == target:
@@ -83,7 +83,19 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        # If node value is none then return
+        # Go left recursive
+        # print value
+        # Go right recursive
+        if node is None:
+            return
+        if self.left is not None:
+            self.left.in_order_print(self.left)
+        print(self.value)
+        if self.right is not None:
+            self.right.in_order_print(self.right)
+
+        
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
